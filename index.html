@@ -4,624 +4,320 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>UNBOUND</title>
+
   <style>
     :root {
       --bg: #ffffff;
-      --bg-soft: #f7f9fc;
-      --card: #ffffff;
+      --bg-soft: #f8fbff;
       --line: #e6ebf2;
       --text: #0f172a;
       --muted: #52607a;
       --accent: #2563eb;
-      --accent-soft: #eff6ff;
-      --shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
-      --radius: 24px;
     }
 
     * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; }
     body {
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
       background: var(--bg);
       color: var(--text);
     }
 
-    a { color: inherit; }
-
-    .page {
-      display: none;
-      min-height: 100vh;
-      background: linear-gradient(180deg, #ffffff 0%, #fbfcfe 100%);
-      animation: fadeIn 0.25s ease;
+    .container {
+      width: min(1100px, 92%);
+      margin: auto;
     }
 
-    .page.active { display: block; }
-
+    /* NAV */
     .nav {
       position: sticky;
       top: 0;
-      z-index: 30;
-      background: rgba(255, 255, 255, 0.96);
+      background: white;
       border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(10px);
-    }
-
-    .container {
-      width: min(1120px, calc(100% - 32px));
-      margin: 0 auto;
+      z-index: 10;
     }
 
     .nav-inner {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 16px;
-      padding: 16px 0;
-    }
-
-    .brand {
-      display: flex;
       align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      font-weight: 800;
-      letter-spacing: 0.14em;
+      padding: 14px 0;
     }
 
-    .brand-mark {
-      width: 42px;
+    .brand img {
       height: 42px;
-      border-radius: 14px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg, #dbeafe, #eef2ff);
-      color: var(--accent);
-      border: 1px solid #dbe4f0;
-      box-shadow: var(--shadow);
     }
 
     .nav-links {
       display: flex;
       gap: 10px;
-      flex-wrap: wrap;
     }
 
     .nav-btn {
-      border: 1px solid transparent;
-      background: transparent;
-      color: var(--muted);
-      padding: 10px 14px;
-      border-radius: 999px;
-      font: inherit;
+      background: none;
+      border: none;
+      padding: 8px 12px;
       cursor: pointer;
-      transition: 0.2s ease;
+      color: var(--muted);
+      border-radius: 20px;
     }
 
-    .nav-btn:hover,
-    .nav-btn.active {
-      background: var(--accent-soft);
+    .nav-btn.active,
+    .nav-btn:hover {
+      background: #eff6ff;
       color: var(--accent);
-      border-color: #dbeafe;
     }
 
+    /* HERO */
     .hero {
-      padding: 70px 0 44px;
+      padding: 90px 0 60px;
+      text-align: center;
     }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 26px;
-      align-items: center;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--accent-soft);
-      color: var(--accent);
-      border: 1px solid #dbeafe;
-      padding: 8px 14px;
-      border-radius: 999px;
-      font-size: 0.93rem;
-      margin-bottom: 18px;
-      font-weight: 600;
-    }
-
-    h1 {
-      font-size: clamp(2.8rem, 6vw, 5.3rem);
-      line-height: 0.95;
-      letter-spacing: -0.06em;
-      margin: 0;
+    .hero-logo {
+      max-width: 420px;
+      width: 100%;
+      margin: 0 auto 20px;
+      display: block;
     }
 
     .hero p {
-      color: var(--muted);
-      line-height: 1.75;
-      font-size: 1.07rem;
       max-width: 700px;
-      margin: 22px 0 28px;
+      margin: 20px auto;
+      color: var(--muted);
+      line-height: 1.7;
     }
 
-    .cta-row {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
+    .cta {
+      margin-top: 25px;
     }
 
     .btn {
+      padding: 12px 20px;
+      border-radius: 10px;
       border: none;
-      text-decoration: none;
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      padding: 14px 18px;
-      border-radius: 16px;
-      font-weight: 700;
       cursor: pointer;
-      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+      font-weight: 600;
+      margin: 5px;
     }
-
-    .btn:hover { transform: translateY(-2px); }
 
     .btn-primary {
       background: var(--accent);
       color: white;
-      box-shadow: var(--shadow);
     }
 
     .btn-secondary {
       background: white;
-      color: var(--text);
       border: 1px solid var(--line);
     }
 
-    .card, .program, .impact-card, .contact-card, .feature {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-
-    .hero-card {
-      padding: 28px;
-      min-height: 420px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
-    }
-
-    .mini-label {
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      font-size: 0.83rem;
-      font-weight: 700;
-    }
-
-    .hero-card h3 {
-      font-size: 1.8rem;
-      margin: 10px 0 12px;
-      letter-spacing: -0.03em;
-    }
-
-    .hero-card p, .feature p, .program p, .impact-card p, .contact-card p {
-      color: var(--muted);
-      line-height: 1.75;
-      margin: 0;
-    }
-
-    .drone-visual {
-      position: relative;
-      min-height: 220px;
-      display: grid;
-      place-items: center;
-      margin-top: 20px;
-    }
-
-    .circle {
-      position: absolute;
-      border-radius: 50%;
-      border: 1px dashed #c8d7ee;
-    }
-
-    .circle.one { width: 230px; height: 230px; }
-    .circle.two { width: 160px; height: 160px; }
-    .circle.three { width: 95px; height: 95px; }
-
-    .core {
-      width: 90px;
-      height: 90px;
-      border-radius: 26px;
-      background: linear-gradient(135deg, #dbeafe, #eef2ff);
-      display: grid;
-      place-items: center;
-      color: var(--accent);
-      border: 1px solid #dbe4f0;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-    }
-
+    /* SECTION */
     .section {
-      padding: 30px 0 72px;
+      padding: 70px 0;
+      text-align: center;
     }
 
-    .section-head {
-      display: flex;
-      justify-content: space-between;
+    .section h2 {
+      font-size: 2.4rem;
+      margin-bottom: 10px;
+    }
+
+    .section p {
+      max-width: 700px;
+      margin: auto;
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
       gap: 20px;
-      align-items: end;
-      margin-bottom: 22px;
+      margin-top: 40px;
     }
 
-    .section-head h2 {
-      margin: 0;
-      font-size: clamp(1.9rem, 4vw, 3.1rem);
-      letter-spacing: -0.05em;
+    .grid-3 {
+      grid-template-columns: repeat(3, 1fr);
     }
 
-    .section-head p {
-      margin: 0;
-      color: var(--muted);
-      max-width: 620px;
-      line-height: 1.7;
+    .grid-2 {
+      grid-template-columns: repeat(2, 1fr);
     }
 
-    .section-copy {
-      max-width: 620px;
-    }
-
-    .section-copy p {
-      margin: 0 0 14px 0;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    .section-copy p:last-child {
-      margin-bottom: 0;
-    }
-
-    .grid-3, .grid-2 {
-      display: grid;
-      gap: 18px;
-    }
-
-    .grid-3 { grid-template-columns: repeat(3, 1fr); }
-    .grid-2 { grid-template-columns: repeat(2, 1fr); }
-
-    .feature, .program, .impact-card, .contact-card { padding: 24px; }
-
-    .icon {
-      width: 54px;
-      height: 54px;
-      border-radius: 18px;
-      display: grid;
-      place-items: center;
-      background: var(--accent-soft);
-      border: 1px solid #dbeafe;
-      font-size: 1.25rem;
-      margin-bottom: 12px;
-    }
-
-    .feature h3, .program h3, .impact-card h3 {
-      margin: 10px 0 10px;
-      font-size: 1.2rem;
-      letter-spacing: -0.02em;
-    }
-
-    .program p + p {
-      margin-top: 12px;
-    }
-
-    .list {
-      display: grid;
-      gap: 12px;
-      margin-top: 16px;
-    }
-
-    .list-item {
-      padding: 14px 16px;
-      background: var(--bg-soft);
+    .card {
+      padding: 24px;
       border: 1px solid var(--line);
       border-radius: 16px;
-      color: var(--muted);
-      line-height: 1.6;
+      background: white;
     }
 
-    .contact-card {
-      text-align: center;
-      padding: 34px 24px;
+    .card h3 {
+      margin-top: 10px;
     }
 
+    /* CONTACT */
+    .contact {
+      padding: 60px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    /* FOOTER */
     footer {
-      padding: 28px 0 42px;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .footer-row {
+      padding: 30px 0;
       border-top: 1px solid var(--line);
-      padding-top: 18px;
-      display: flex;
-      justify-content: space-between;
-      gap: 14px;
-      flex-wrap: wrap;
+      text-align: center;
+      color: var(--muted);
     }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(6px);
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .grid-3, .grid-2 {
+        grid-template-columns: 1fr;
       }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @media (max-width: 980px) {
-      .hero-grid, .grid-3, .grid-2, .section-head { grid-template-columns: 1fr; }
-      .section-head {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
-
-    @media (max-width: 680px) {
-      .nav-inner {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .cta-row .btn { width: 100%; }
-      h1 { font-size: 2.8rem; }
     }
   </style>
 </head>
+
 <body>
-  <nav class="nav">
-    <div class="container nav-inner">
-      <a href="#" class="brand" onclick="showPage('home'); return false;">
-        <div class="brand-mark">U</div>
-        <div>UNBOUND</div>
-      </a>
-      <div class="nav-links">
-        <button class="nav-btn active" data-page="home" onclick="showPage('home')">Home</button>
-        <button class="nav-btn" data-page="about" onclick="showPage('about')">About</button>
-        <button class="nav-btn" data-page="programs" onclick="showPage('programs')">Programs</button>
-        <button class="nav-btn" data-page="impact" onclick="showPage('impact')">Impact</button>
-        <button class="nav-btn" data-page="contact" onclick="showPage('contact')">Contact</button>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="#" class="brand" onclick="showPage('home'); return false;">
+      <img src="logo.png" alt="UNBOUND logo">
+    </a>
+
+    <div class="nav-links">
+      <button class="nav-btn active" onclick="showPage('home')">Home</button>
+      <button class="nav-btn" onclick="showPage('about')">About</button>
+      <button class="nav-btn" onclick="showPage('programs')">Programs</button>
+      <button class="nav-btn" onclick="showPage('contact')">Contact</button>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<!-- HOME -->
+<section id="home" class="page active">
+  <div class="container hero">
+    <img src="logo.png" class="hero-logo" alt="UNBOUND">
+
+    <p>
+      UNBOUND is a drone education initiative in San Jose focused on making robotics through flight accessible, hands-on, and meaningful.
+    </p>
+
+    <p>
+      From DJI Tello programming to FPV drone builds to outreach for hospitalized children, UNBOUND is about bringing engineering and freedom together.
+    </p>
+
+    <div class="cta">
+      <button class="btn btn-primary" onclick="showPage('programs')">Explore Programs</button>
+      <button class="btn btn-secondary" onclick="showPage('about')">Learn More</button>
+    </div>
+  </div>
+
+  <div class="container section">
+    <h2>What makes UNBOUND different</h2>
+
+    <div class="grid grid-3">
+      <div class="card">
+        <h3>🚁 Drone-first</h3>
+        <p>Focused deeply on drones, not general STEM.</p>
+      </div>
+
+      <div class="card">
+        <h3>🛠️ Hands-on</h3>
+        <p>Build, wire, and fly — not just theory.</p>
+      </div>
+
+      <div class="card">
+        <h3>✨ Meaningful</h3>
+        <p>Bringing flight to kids who can’t go outside.</p>
       </div>
     </div>
-  </nav>
+  </div>
+</section>
 
-  <main>
-    <section id="home" class="page active">
-      <div class="container hero">
-        <div class="hero-grid">
-          <div>
-            <div class="pill">Drone Education • Robotics • Access • Community</div>
-            <h1>UNBOUND</h1>
-            <p>
-              UNBOUND is an organization built to make drone education accessible in San Jose. The goal is to create a place where students and beginners can explore drones as a real form of robotics through coaching sessions, hands-on builds, and flight experiences that feel exciting, creative, and meaningful.
-            </p>
-            <p>
-              From learning with DJI Tello to understanding hardware connections in FPV drones, and from coding to outreach for children who are stuck indoors because of medical conditions, UNBOUND is about helping people experience curiosity, freedom, and engineering in a way that feels real.
-            </p>
-            <div class="cta-row">
-              <button class="btn btn-primary" onclick="showPage('programs')">Explore programs</button>
-              <button class="btn btn-secondary" onclick="showPage('about')">Learn more</button>
-            </div>
-          </div>
+<!-- ABOUT -->
+<section id="about" class="page">
+  <div class="container section">
+    <h2>About UNBOUND</h2>
 
-          <div class="card hero-card">
-            <div>
-              <div class="mini-label">Vision</div>
-              <h3>Give more people access to the world of drones.</h3>
-              <p>
-                In a place with so much technology, drone education should not feel rare or out of reach. UNBOUND exists to turn interest into opportunity.
-              </p>
-            </div>
-            <div class="drone-visual" aria-hidden="true">
-              <div class="circle one"></div>
-              <div class="circle two"></div>
-              <div class="circle three"></div>
-              <div class="core">FLY</div>
-            </div>
-          </div>
-        </div>
+    <p>
+      UNBOUND was created to make drone education accessible in Silicon Valley, where surprisingly few structured opportunities exist.
+    </p>
+
+    <p>
+      Drones combine hardware, software, and creativity — but getting started is often unclear. UNBOUND simplifies that.
+    </p>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section id="programs" class="page">
+  <div class="container section">
+    <h2>Programs</h2>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Hackathons</h3>
+        <p>Build and code drone challenges.</p>
       </div>
 
-      <div class="container section">
-        <div class="section-head">
-          <h2>What makes UNBOUND different</h2>
-          <p>
-            This is not a general STEM club and not a sports organization. It is centered specifically on drones, flight, robotics, and the freedom those experiences can create.
-          </p>
-        </div>
-        <div class="grid-3">
-          <div class="feature">
-            <div class="icon">🚁</div>
-            <h3>Drone-first learning</h3>
-            <p>
-              Focused specifically on drones rather than broad engineering topics, so students can go deeper into flight systems, controls, and real-world applications.
-            </p>
-          </div>
-          <div class="feature">
-            <div class="icon">🛠️</div>
-            <h3>Hands-on building</h3>
-            <p>
-              Students do not just watch demonstrations. They learn through hardware connections, components, setup, and practical problem-solving.
-            </p>
-          </div>
-          <div class="feature">
-            <div class="icon">✨</div>
-            <h3>Freedom and inspiration</h3>
-            <p>
-              UNBOUND also brings drone experiences to children whose medical conditions keep them indoors, helping them feel wonder, movement, and connection.
-            </p>
-          </div>
-        </div>
+      <div class="card">
+        <h3>DJI Tello</h3>
+        <p>Beginner programming sessions.</p>
       </div>
-    </section>
 
-    <section id="about" class="page">
-      <div class="container section">
-        <div class="section-head">
-          <h2>About UNBOUND</h2>
-          <div class="section-copy">
-            <p>
-              UNBOUND started from a simple realization: despite being in the heart of Silicon Valley, there are very few accessible opportunities for students to learn about drones in a structured, hands-on way.
-            </p>
-            <p>
-              Drones combine hardware, software, control systems, and creativity, but for many people, getting started feels unclear or inaccessible.
-            </p>
-            <p>
-              UNBOUND was created to change that.
-            </p>
-            <p>
-              At the same time, drones represent something more than technology. They represent movement, perspective, and freedom. That is why UNBOUND also focuses on outreach for children who are often confined indoors due to medical conditions, helping them experience flight in a way that feels real and meaningful.
-            </p>
-          </div>
-        </div>
-
-        <div class="grid-2">
-          <div class="impact-card">
-            <div class="mini-label">Mission</div>
-            <h3>Make drone education more available.</h3>
-            <p>
-              UNBOUND helps beginners learn what drones really are: not just gadgets, but systems that combine hardware, software, control, design, and creativity.
-            </p>
-          </div>
-          <div class="impact-card">
-            <div class="mini-label">Why the name fits</div>
-            <h3>“Unbound” means not limited.</h3>
-            <p>
-              Drones represent motion, perspective, exploration, and freedom. The name reflects both the literal feeling of flight and the idea of opening up opportunities that people may not otherwise have.
-            </p>
-          </div>
-        </div>
-
-        <div class="impact-card" style="margin-top:18px;">
-          <div class="mini-label">Core idea</div>
-          <h3>Engineering that feels alive</h3>
-          <p>
-            UNBOUND is meant to make robotics feel tangible. Instead of only learning abstract concepts, students can connect them to something they can build, fly, debug, and understand. That makes learning more memorable and more empowering.
-          </p>
-        </div>
+      <div class="card">
+        <h3>FPV Building</h3>
+        <p>Learn real drone hardware.</p>
       </div>
-    </section>
 
-    <section id="programs" class="page">
-      <div class="container section">
-        <div class="section-head">
-          <h2>Programs</h2>
-          <p>
-            UNBOUND can grow through several kinds of sessions, each designed to make drones approachable for different ages and experience levels.
-          </p>
-        </div>
-        <div class="grid-2">
-          <div class="program">
-            <div class="mini-label">01</div>
-            <h3>Drone Hackathons</h3>
-            <p>
-              Competitive drone hackathons where participants design and code flight solutions for obstacle-based challenges. Teams apply programming, problem-solving, and real-time debugging skills, with awards recognizing innovation, efficiency, and performance.
-            </p>
-          </div>
-          <div class="program">
-            <div class="mini-label">02</div>
-            <h3>DJI Tello Coaching Sessions</h3>
-            <p>
-              Beginner-friendly sessions focused on programming DJI Tello drones. Students learn to write code to control takeoff, landing, movement, and basic flight patterns, while building foundational skills in logic, sequencing, and real-time control through hands-on challenges.
-            </p>
-          </div>
-          <div class="program">
-            <div class="mini-label">03</div>
-            <h3>Intro to Drone Robotics</h3>
-            <p>
-              Sessions introducing how drones connect to robotics concepts such as sensors, motors, control systems, stability, and communication.
-            </p>
-            <p>
-              Additional workshops focus on FPV drone structure, hardware connections, components, and how a drone comes together as a complete system.
-            </p>
-          </div>
-          <div class="program">
-            <div class="mini-label">04</div>
-            <h3>UNBOUND Outreach</h3>
-            <p>
-              Outreach sessions are designed for patients, especially children, who may not be able to go outside. Using drones near windows or open spaces, participants can control flight and explore the outside world in a safe, guided way, turning coding into a tool for curiosity, movement, and connection beyond their immediate environment.
-            </p>
-          </div>
-        </div>
+      <div class="card">
+        <h3>Outreach</h3>
+        <p>Flight experiences for hospitalized kids.</p>
       </div>
-    </section>
-
-    <section id="impact" class="page">
-      <div class="container section">
-        <div class="section-head">
-          <h2>Impact</h2>
-          <p>
-            UNBOUND is not only about technical knowledge. It is also about the feeling of possibility that drones can create.
-          </p>
-        </div>
-        <div class="grid-2">
-          <div class="impact-card">
-            <div class="mini-label">Community</div>
-            <h3>Build a drone learning community in San Jose</h3>
-            <div class="list">
-              <div class="list-item">Create a visible local space for drone curiosity and beginner learning.</div>
-              <div class="list-item">Help students see drones as a real path into robotics and engineering.</div>
-              <div class="list-item">Lower the barrier to entry for people who do not know where to start.</div>
-            </div>
-          </div>
-          <div class="impact-card">
-            <div class="mini-label">Outreach</div>
-            <h3>Bring the feeling of flight to kids indoors</h3>
-            <div class="list">
-              <div class="list-item">Design sessions for children with medical conditions who are often stuck inside.</div>
-              <div class="list-item">Use drone experiences to create joy, exploration, and a sense of freedom.</div>
-              <div class="list-item">Show that engineering can also be compassionate and human-centered.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="page">
-      <div class="container section">
-        <div class="contact-card">
-          <div class="mini-label">Get involved</div>
-          <h2>Help build UNBOUND</h2>
-          <p>
-            UNBOUND is looking for students, mentors, educators, community partners, and supporters who want to help expand drone education and create meaningful outreach experiences.
-          </p>
-          <div class="cta-row" style="justify-content:center; margin-top:24px;">
-            <a class="btn btn-primary" href="mailto:keyie.xue@gmail.com">Email us</a>
-            <a class="btn btn-secondary" href="https://instagram.com/" target="_blank" rel="noopener noreferrer">Instagram</a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container footer-row">
-      <div>© 2026 UNBOUND</div>
-      <div>Drone education, access, and freedom.</div>
     </div>
-  </footer>
+  </div>
+</section>
 
-  <script>
-    function showPage(pageId) {
-      document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-      document.getElementById(pageId).classList.add('active');
-      document.querySelectorAll('.nav-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.page === pageId);
-      });
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  </script>
+<!-- CONTACT -->
+<section id="contact" class="page">
+  <div class="container section">
+    <div class="contact">
+      <h2>Get involved</h2>
+      <p>Join UNBOUND or help us expand drone education.</p>
+
+      <div class="cta">
+        <a href="mailto:unbounddrones@gmail.com">
+          <button class="btn btn-primary">Email</button>
+        </a>
+
+        <a href="https://instagram.com/" target="_blank">
+          <button class="btn btn-secondary">Instagram</button>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  © 2026 UNBOUND — Drone education, access, and freedom.
+</footer>
+
+<script>
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+
+  document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+}
+</script>
+
 </body>
 </html>
