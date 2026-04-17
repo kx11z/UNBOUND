@@ -68,16 +68,12 @@
       letter-spacing: 0.14em;
     }
 
-    .brand-mark {
-      width: 42px;
-      height: 42px;
-      border-radius: 14px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg, #dbeafe, #eef2ff);
-      color: var(--accent);
-      border: 1px solid #dbe4f0;
-      box-shadow: var(--shadow);
+    .brand-logo {
+      height: 80px !important;
+      max-height: none !important;
+      width: auto;
+      display: block;
+      object-fit: contain;
     }
 
     .nav-links {
@@ -249,15 +245,12 @@
     }
 
     .section-head {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      align-items: end;
+      display: block;
       margin-bottom: 22px;
     }
 
     .section-head h2 {
-      margin: 0;
+      margin: 0 0 12px 0;
       font-size: clamp(1.9rem, 4vw, 3.1rem);
       letter-spacing: -0.05em;
     }
@@ -265,12 +258,12 @@
     .section-head p {
       margin: 0;
       color: var(--muted);
-      max-width: 620px;
+      max-width: 760px;
       line-height: 1.7;
     }
 
     .section-copy {
-      max-width: 620px;
+      max-width: 760px;
     }
 
     .section-copy p {
@@ -362,12 +355,7 @@
     }
 
     @media (max-width: 980px) {
-      .hero-grid, .grid-3, .grid-2, .section-head { grid-template-columns: 1fr; }
-      .section-head {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-      }
+      .hero-grid, .grid-3, .grid-2 { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 680px) {
@@ -378,20 +366,15 @@
       .cta-row .btn { width: 100%; }
       h1 { font-size: 2.8rem; }
     }
-.brand-logo {
-  height: 80px !important;
-  max-height: none !important;
-  width: auto;
-}
   </style>
 </head>
 <body>
   <nav class="nav">
     <div class="container nav-inner">
       <a href="#" class="brand" onclick="showPage('home'); return false;">
-  <img src="logo.png" alt="UNBOUND logo" class="brand-logo" />
-  <div>UNBOUND</div>
-</a>
+        <img src="logo.png" alt="UNBOUND logo" class="brand-logo" />
+        <div>UNBOUND</div>
+      </a>
       <div class="nav-links">
         <button class="nav-btn active" data-page="home" onclick="showPage('home')">Home</button>
         <button class="nav-btn" data-page="about" onclick="showPage('about')">About</button>
