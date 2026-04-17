@@ -32,6 +32,7 @@
       display: none;
       min-height: 100vh;
       background: linear-gradient(180deg, #ffffff 0%, #fbfcfe 100%);
+      animation: fadeIn 0.25s ease;
     }
 
     .page.active { display: block; }
@@ -159,7 +160,7 @@
       border-radius: 16px;
       font-weight: 700;
       cursor: pointer;
-      transition: transform 0.18s ease;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
     }
 
     .btn:hover { transform: translateY(-2px); }
@@ -268,6 +269,20 @@
       line-height: 1.7;
     }
 
+    .section-copy {
+      max-width: 620px;
+    }
+
+    .section-copy p {
+      margin: 0 0 14px 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .section-copy p:last-child {
+      margin-bottom: 0;
+    }
+
     .grid-3, .grid-2 {
       display: grid;
       gap: 18px;
@@ -294,6 +309,10 @@
       margin: 10px 0 10px;
       font-size: 1.2rem;
       letter-spacing: -0.02em;
+    }
+
+    .program p + p {
+      margin-top: 12px;
     }
 
     .list {
@@ -331,8 +350,24 @@
       flex-wrap: wrap;
     }
 
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     @media (max-width: 980px) {
-      .hero-grid, .grid-3, .grid-2 { grid-template-columns: 1fr; }
+      .hero-grid, .grid-3, .grid-2, .section-head { grid-template-columns: 1fr; }
+      .section-head {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
 
     @media (max-width: 680px) {
@@ -341,10 +376,6 @@
         align-items: flex-start;
       }
       .cta-row .btn { width: 100%; }
-      .section-head {
-        flex-direction: column;
-        align-items: flex-start;
-      }
       h1 { font-size: 2.8rem; }
     }
   </style>
@@ -377,7 +408,7 @@
               UNBOUND is an organization built to make drone education accessible in San Jose. The goal is to create a place where students and beginners can explore drones as a real form of robotics through coaching sessions, hands-on builds, and flight experiences that feel exciting, creative, and meaningful.
             </p>
             <p>
-              From learning with DJI Tello, to understanding hardware connections in FPV drones, to bringing the feeling of flight to kids who are stuck indoors because of medical conditions, UNBOUND is about helping people experience curiosity, freedom, and engineering in a way that feels real.
+              From learning with DJI Tello to understanding hardware connections in FPV drones, and from coding to outreach for children who are stuck indoors because of medical conditions, UNBOUND is about helping people experience curiosity, freedom, and engineering in a way that feels real.
             </p>
             <div class="cta-row">
               <button class="btn btn-primary" onclick="showPage('programs')">Explore programs</button>
@@ -440,19 +471,22 @@
       <div class="container section">
         <div class="section-head">
           <h2>About UNBOUND</h2>
-          <p>
-	UNBOUND started from a simple realization: despite being in the heart of Silicon Valley, there are very few accessible opportunities for students to learn about drones in a structured, hands-on way.
- </p>
-  <p>
-Drones combine hardware, software, control systems, and creativity—but for many people, getting started feels unclear or inaccessible.
- </p>
-  <p>
-UNBOUND was created to change that.
- </p>
-  <p>
-At the same time, drones represent something more than technology—they represent movement, perspective, and freedom. That’s why UNBOUND also focuses on outreach for children who are often confined indoors due to medical conditions, helping them experience flight in a way that feels real and meaningful.
-          </p>
+          <div class="section-copy">
+            <p>
+              UNBOUND started from a simple realization: despite being in the heart of Silicon Valley, there are very few accessible opportunities for students to learn about drones in a structured, hands-on way.
+            </p>
+            <p>
+              Drones combine hardware, software, control systems, and creativity, but for many people, getting started feels unclear or inaccessible.
+            </p>
+            <p>
+              UNBOUND was created to change that.
+            </p>
+            <p>
+              At the same time, drones represent something more than technology. They represent movement, perspective, and freedom. That is why UNBOUND also focuses on outreach for children who are often confined indoors due to medical conditions, helping them experience flight in a way that feels real and meaningful.
+            </p>
+          </div>
         </div>
+
         <div class="grid-2">
           <div class="impact-card">
             <div class="mini-label">Mission</div>
@@ -469,6 +503,7 @@ At the same time, drones represent something more than technology—they represe
             </p>
           </div>
         </div>
+
         <div class="impact-card" style="margin-top:18px;">
           <div class="mini-label">Core idea</div>
           <h3>Engineering that feels alive</h3>
@@ -492,7 +527,7 @@ At the same time, drones represent something more than technology—they represe
             <div class="mini-label">01</div>
             <h3>Drone Hackathons</h3>
             <p>
-              Competitive drone hackathons where participants design and code flight solutions to navigate obstacle-based challenges. Teams apply programming, problem-solving, and real-time debugging skills, with awards recognizing innovation, efficiency, and performance.
+              Competitive drone hackathons where participants design and code flight solutions for obstacle-based challenges. Teams apply programming, problem-solving, and real-time debugging skills, with awards recognizing innovation, efficiency, and performance.
             </p>
           </div>
           <div class="program">
@@ -506,18 +541,17 @@ At the same time, drones represent something more than technology—they represe
             <div class="mini-label">03</div>
             <h3>Intro to Drone Robotics</h3>
             <p>
-              Sessions explaining how drones connect to robotics concepts like sensors, motors, control, stability, and communication.
-                 </p>   
-                 <p>
-                 
-              Additionally, there are sessions that focuses on the structure of FPV drones, hardware connections, components, and how a drone comes together as a system.
+              Sessions introducing how drones connect to robotics concepts such as sensors, motors, control systems, stability, and communication.
+            </p>
+            <p>
+              Additional workshops focus on FPV drone structure, hardware connections, components, and how a drone comes together as a complete system.
             </p>
           </div>
           <div class="program">
             <div class="mini-label">04</div>
             <h3>UNBOUND Outreach</h3>
             <p>
-              Hospital-based sessions designed for patients—especially children—who may not be able to go outside. Using drones near windows or open spaces, participants can control flight and explore the outside world in a safe, guided way, turning coding into a tool for curiosity, movement, and connection beyond their immediate environment.
+              Outreach sessions are designed for patients, especially children, who may not be able to go outside. Using drones near windows or open spaces, participants can control flight and explore the outside world in a safe, guided way, turning coding into a tool for curiosity, movement, and connection beyond their immediate environment.
             </p>
           </div>
         </div>
@@ -565,7 +599,7 @@ At the same time, drones represent something more than technology—they represe
           </p>
           <div class="cta-row" style="justify-content:center; margin-top:24px;">
             <a class="btn btn-primary" href="mailto:hello@unboundinitiative.org">Email us</a>
-            <a class="btn btn-secondary" href="#">Instagram</a>
+            <a class="btn btn-secondary" href="https://instagram.com/" target="_blank" rel="noopener noreferrer">Instagram</a>
           </div>
         </div>
       </div>
